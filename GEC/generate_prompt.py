@@ -2,15 +2,15 @@ import torch
 import os
 from numpy import mean
 from tqdm import tqdm
-from transformers import AutoTokenizer, T5ForConditionalGeneration
+from transformers import AutoTokenizer, AutoModelForCausalLM
 from Dataset_prompt import Dataset
 from CodeBleu import _bleu
 from sacrebleu.metrics import BLEU, CHRF, TER
 
 
-Test_data = Dataset(Path_to_dataset='../ECG/test', Maximum_number_of_tokens=2048, Model_path='codeT5_large/checkpoint-7510')
-Tokenized_word_list = AutoTokenizer.from_pretrained('codeT5_large/checkpoint-7510')
-model = T5ForConditionalGeneration.from_pretrained('codeT5_large/checkpoint-7510')
+Test_data = Dataset(Path_to_dataset='../ECG/test', Maximum_number_of_tokens=2048, Model_path='Yhhhhhhhhh/python_lora_codellama')
+Tokenized_word_list = AutoTokenizer.from_pretrained('Yhhhhhhhhh/python_lora_codellama')
+model = AutoModelForCausalLM.from_pretrained('Yhhhhhhhhh/python_lora_codellama')
 device = (torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu'))
 model.to(device)
 if (not os.path.exists(f'generate')):
