@@ -11,6 +11,7 @@ class Dataset(torch.utils.data.Dataset):
         self.Path_to_dataset = Path_to_dataset
         self.Maximum_number_of_tokens = Maximum_number_of_tokens
         self.Tokenized_word_list = AutoTokenizer.from_pretrained(Model_path)
+        self.Tokenized_word_list.pad_token = self.Tokenized_word_list.eos_token
         self.Total_Data_List = []
         self.Total_Data_Dictionary = {}
         self.Initialization_Functions()
