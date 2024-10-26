@@ -10,6 +10,7 @@ from sacrebleu.metrics import BLEU, CHRF, TER
 
 Test_data = Dataset(Path_to_dataset='./test', Maximum_number_of_tokens=2048, Model_path='Yhhhhhhhhh/python_lora_codellama')
 Tokenized_word_list = AutoTokenizer.from_pretrained('Yhhhhhhhhh/python_lora_codellama')
+Tokenized_word_list.pad_token = Tokenized_word_list.eos_token
 model = AutoModelForCausalLM.from_pretrained('Yhhhhhhhhh/python_lora_codellama')
 device = (torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu'))
 model.to(device)
@@ -18,7 +19,7 @@ if (not os.path.exists(f'generate')):
 Total_list_of_BLEU_scores = []
 Total_list_of_CodeBLEU_scores = []
 for (Index, test_tensor) in tqdm(enumerate(Test_data)):
-    Generate_Token = model.generate(torch.unsqueeze(test_tensor['input_ids'].to(device), dim=0), max_length=768, num_beams=5, early_stopping=True)
+    Generate_Token = model.generate(torch.unsqueeze(test_tensor['input_ids'].to(device), dim=0), max_length=2048, num_beams=5, early_stopping=True)
     Prediction_code = Tokenized_word_list.decode(Generate_Token[0], skip_special_tokens=True)
     Standard_answer = test_tensor['Label_Code']
     bleu = BLEU()
