@@ -2,15 +2,15 @@
 import torch
 import os
 from tqdm import tqdm
-from transformers import RobertaTokenizer, T5ForConditionalGeneration
+from transformers import AutoModelForCausalLM, AutoTokenizer
 import json
 
 class Dataset(torch.utils.data.Dataset):
 
-    def __init__(self, Path_to_dataset='F:/ECG/train', Maximum_number_of_tokens=1024, Model_path='codet5-base'):
+    def __init__(self, Path_to_dataset='./train', Maximum_number_of_tokens=1024, Model_path='Yhhhhhhhhh/python_lora_codellama'):
         self.Path_to_dataset = Path_to_dataset
         self.Maximum_number_of_tokens = Maximum_number_of_tokens
-        self.Tokenized_word_list = RobertaTokenizer.from_pretrained(Model_path)
+        self.Tokenized_word_list = AutoTokenizer.from_pretrained(Model_path)
         self.Total_Data_List = []
         self.Total_Data_Dictionary = {}
         self.Initialization_Functions()
