@@ -15,7 +15,7 @@ class Dataset(torch.utils.data.Dataset):
         self.Total_Data_Dictionary = {}
         self.Initialization_Functions()
 
-    def Initialization_function(self):
+    def Initialization_Functions(self):
         Total_Data_List = []
         Skipped_Questions_List = []
         List_of_data_sets = os.listdir(f'{self.Path_to_dataset}')
@@ -25,7 +25,7 @@ class Dataset(torch.utils.data.Dataset):
             Total_problem_text_tensor_dictionary = self.Tokenized_word_list(Total_problem_text, return_tensors='pt')
             if (len(Total_problem_text_tensor_dictionary['input_ids'][0]) > 1278):
                 continue
-            with open(f'{self.Path_to_dataset}/{question}/Accepted.txt', 'r', encoding='UTF-8') as f:
+            with open(f'{self.Path_to_dataset}/{question}/Accepted.json', 'r', encoding='UTF-8') as f:
                 Tag_Codes = f.read()
             Tag_code_tensor_dictionary = self.Tokenized_word_list(Tag_Codes, return_tensors='pt')
             if (len(Tag_code_tensor_dictionary['input_ids'][0]) > 766):
